@@ -69,7 +69,7 @@ app.post('/api/pix', async (req, res) => {
         nome,
         cpf,
         valor:    85,
-        descricao: 'Taxa de Inscrição ENEM 2026'
+        descricao: 'Caderno Falante'
       })
     });
 
